@@ -1,5 +1,3 @@
-package com.practice.algodata.DataStructures_Algorithms;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +73,10 @@ public class BinaryTree {
 		bt.addNode(10);
 		bt.addNode(18);
 		bt.addNode(8);
+		
+		int height = bt.heightOfBTree(bt.rootNode);
+		
+		System.out.println("The height :: "+height);
 		
 		bt.preOrderTraversal(bt.rootNode);
 	/*	bt.kthSmallestElement(bt.rootNode,8);
@@ -261,4 +263,17 @@ public class BinaryTree {
 	
 	
 
+}
+
+class Node{
+	Node left;
+	Node right;
+	int value;
+	
+	Node(Node left,Node right,int val){
+		this.left = left;
+		this.right = right;
+		this.value = val;
+	}
+	
 }

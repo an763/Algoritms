@@ -31,7 +31,7 @@ public class LinkListReverseAndSwap {
 		
 		
 		// Reverse using Non Tail Recursion
-		ListNode revr = s.reverseLLNonTailRecursion(head);
+		ListNode revr = s.swapPairsByRecursion(head);
 		ListNode forTailrecurse = revr;
 		
 		while(revr != null) {
@@ -44,7 +44,37 @@ public class LinkListReverseAndSwap {
 		while(res != null) {
 			System.out.print(res.val+"-->" );
 			res = res.next;			
-		}		
+		}	
+		
+		ListNode head2 = new ListNode(2);
+		ListNode sixVal = new ListNode(6);
+		ListNode tenVal = new ListNode(10);
+		ListNode sixteenVal = new ListNode(16);
+		ListNode eightteenVal = new ListNode(18);
+		
+		head2.next = sixVal;
+		sixVal.next = tenVal;
+		tenVal.next = sixteenVal;
+		sixteenVal.next = eightteenVal;
+		eightteenVal.next = null;
+		
+		
+		ListNode head1 = new ListNode(2);
+		ListNode fiveVal = new ListNode(6);
+		ListNode sevenVal = new ListNode(10);
+		ListNode seventeenVal = new ListNode(16);
+		ListNode nineteenVal = new ListNode(18);
+		head1.next = fiveVal;
+		fiveVal.next = sevenVal;
+		sevenVal.next = seventeenVal;
+		seventeenVal.next = nineteenVal;
+		nineteenVal.next = null;
+		System.out.println("------------------------------" );
+		ListNode mergedHead = mergeTwoLists(head1, head2);
+		while(mergedHead != null) {
+			System.out.print(mergedHead.val+"-->" );
+			mergedHead = mergedHead.next;			
+		}	
 	
 	}
 
@@ -124,7 +154,7 @@ public class LinkListReverseAndSwap {
 	 current.next = null;
 	 return newHead;
  }
- 
+
  // Reverse linked list using tail recursion
  
  private ListNode reverseLLTailRecursion(ListNode current, ListNode prev) {
@@ -160,6 +190,42 @@ public class LinkListReverseAndSwap {
 	 }
 	 return newHead;
  }
+ 
+ private static ListNode mergeTwoLists(ListNode head1, ListNode head2) {
+	 // we will merge l2 into l1, so we will add nodes of l2 into l1
+	 
+	 // first find which list has lesser value of the first node, we will make head of the merge list
+	 ListNode temp1 = null;
+	 ListNode temp2 = null;
+	 ListNode curr1 = null; //moving pointer in list with lower head value
+	 ListNode curr2 = null; // moving pointer in list with greater head value
+	 ListNode mergedHead = null; // initial pointer to list with lower head value.
+	 if(head2.val > head1.val) {
+		 mergedHead = head1;
+		 curr1 = head1;
+		 curr2 =head2;
+	 }else {
+		 mergedHead = head2;
+		 curr1 = head2;
+		 curr2 = head1;		 
+	 }
+	 	
+	 while (curr1 != null && curr2 != null) {
+		 while(curr1.next != null && curr1.next.val < curr2.val ) {
+			 curr1 = curr1.next;
+		 }
+			temp1 = curr1.next;
+			curr1.next = curr2;
+			temp2 = curr2.next;
+			curr2.next = temp1;
+			curr2 = temp2;
+			curr1 = curr1.next;
+		}
+	 
+	 return mergedHead;
+ }
+ 
+ 
 
 
 }
