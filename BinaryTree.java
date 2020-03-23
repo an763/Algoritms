@@ -1,12 +1,43 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
-public class BinaryTree {
+public class BinaryTree {   
 	
 	Node rootNode = null;
 	Node nodeToadd = null;
 	List<Integer> st = new ArrayList<Integer>();
 	int height;
+	
+	
+	
+	public void swapBTree(Node node) {
+		if(node == null) return;
+		Node temp = node.left;
+		node.left = node.right;
+		node.right = temp;
+		swapBinaryTree(node.left);
+		swapBinaryTree(node.right);
+	}
+	
+	  public boolean helper(TreeNode node, Integer lower, Integer upper) {
+		    if (node == null) return true;
+
+		    int val = node.val;
+		    if (lower != null && val <= lower) return false;
+		    if (upper != null && val >= upper) return false;
+
+		    if (! helper(node.right, val, upper)) return false;
+		    if (! helper(node.left, lower, val)) return false;
+		    return true;
+		  }
+
+		  public boolean isValidBST(TreeNode root) {
+		    return helper(root, null, null);
+		  }
+	
+	
 	
 	public void addNode(int nodeVal)
 	{
@@ -55,6 +86,16 @@ public class BinaryTree {
 		preOrderTraversal(node.right);
 	}
 	
+	public void postOrderTraversal(Node node)
+	{
+		if (node == null) return;
+		
+		
+		postOrderTraversal(node.left);
+		postOrderTraversal(node.right);
+		System.out.println("The node value is "+node.value);
+	}
+	
 	
 	public static void main(String [] args)
 	{
@@ -73,8 +114,14 @@ public class BinaryTree {
 		bt.addNode(10);
 		bt.addNode(18);
 		bt.addNode(8);
+		bt.addNode(4);
+		bt.addNode(6);
 		
-		int height = bt.heightOfBTree(bt.rootNode);
+		System.out.println("postOrderTraversal ");
+		bt.postOrderTraversal(bt.rootNode);
+		
+		
+	/*	int height = bt.heightOfBTree(bt.rootNode);
 		
 		System.out.println("The height :: "+height);
 		
@@ -95,15 +142,15 @@ public class BinaryTree {
 		}	*/		
 		
 	//	bt.swapBinaryTree(bt.rootNode);
-		System.out.println("After swap**** ");
+		System.out.println("preOrderTraversal**** ");
 		bt.preOrderTraversal(bt.rootNode);
 		
 //		bt.height = bt.heightOfBTree(bt.rootNode);
 		
-		System.out.println("Going to delete node 19 ******" );
+	/*	System.out.println("Going to delete node 19 ******" );
 		
 		bt.deleteNode(9);
-		bt.preOrderTraversal(bt.rootNode);
+		bt.preOrderTraversal(bt.rootNode);*/
 		
 	}
 	 
@@ -255,8 +302,51 @@ public class BinaryTree {
 		
 	}
 	
+	public void levelOrder(Node node) {
+		if(node==null) return;		
+		Queue<Node> nodeHolder = new LinkedList<Node>();
+		nodeHolder.add(node);		
+		while(!nodeHolder.isEmpty()) {
+			Node current = nodeHolder.poll();
+			System.out.println("The value of node :: "+current.value);
+			if(current.left!=null) {
+				nodeHolder.add(current.left);
+			}
+			if(current.right!=null) {
+				nodeHolder.add(current.right);
+			}			
+		}		
+	}
 	
 	
+	  public TreeNode searchBST(TreeNode root, int val) {  
+	        if(root == null) return null;
+	        Queue<TreeNode> children = new LinkedList<TreeNode>();
+	        children.add(root);
+	        while(!children.isEmpty()){
+	            TreeNode current = children.poll();
+	            if(current.val == val){
+	                return current;
+	            }else{
+	                if(current.left != null) children.add(current.left);
+	                if(current.right != null) children.add(current.right);
+	            }
+	        }
+	        return null;       
+	        
+	        /*
+	         TreeNode temp = null;
+        if (root == null || root.val == val) {
+        return root;
+        }
+        if (val < root.val) {
+             temp = searchBST(root.left, val);         
+        }else{
+             temp = searchBST(root.right, val);            
+        }
+        return temp;
+	         */
+	    }
 	
 
 	
