@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-//Test
+//Test 
 public class Anagrams {
     static boolean isAnagram(String a, String b) {
         Map<Character, Integer> first = new HashMap<>();
