@@ -1,7 +1,14 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BinaryTree {   
 	
@@ -86,8 +93,18 @@ public class BinaryTree {
 		preOrderTraversal(node.right);
 	}
 	
+	public void inOrderTraversal(Node node)
+	{
+		if (node == null) return;
+		inOrderTraversal(node.left);
+		System.out.println("The node value is "+node.value);		
+		inOrderTraversal(node.right);
+	}
+	
 	public void postOrderTraversal(Node node)
 	{
+		
+		
 		if (node == null) return;
 		
 		
@@ -99,12 +116,73 @@ public class BinaryTree {
 	
 	public static void main(String [] args)
 	{
+		
+	/*	Scanner in = new Scanner(System.in);
+		String first = in.nextLine();
+		System.out.println("The first line :: "+first);
+		
+		
+		int[] crossword [] = new int[10][20];
+		  for (int i = 0; i < crossword.length; i++)
+		     for (int j = 0; j < crossword.length; j++)
+		        crossword[i][j] = 'x';	
+		//  System.out.println(crossword.length);
+		  
+		  Stream<Integer> numStream = Stream.of(10, 20, 30);
+		  numStream.map(n -> n + 10).peek(s -> System.out.print(s));
+	//	  numStream.forEach(s -> System.out.println(s));
+		  byte b = 5;
+		  
+		  String lol = "lol";
+		           System.out.println(lol.toUpperCase() == lol);
+		           System.out.println(lol.toUpperCase() == lol.toUpperCase());
+		           System.out.println(lol.toUpperCase().equals(lol));
+		           System.out.println(lol.toUpperCase().equals(lol.toUpperCase()));
+		           System.out.println(lol.toUpperCase().equalsIgnoreCase(lol));
+		          System.out.println(lol.toUpperCase()
+		             .equalsIgnoreCase(lol.toUpperCase()));
+		
+		  StringBuilder builder = new StringBuilder("Leaves growing");
+		  do {
+		     builder.delete(0, 5);
+		  } while (builder.length() > 5);
+		  System.out.println(builder);
+		  
+		  
+		int sum = Arrays.stream(new int[]{1, 2, 3})
+				  .filter(i -> i >= 2)
+				  .map(i -> i * 3)
+				  .sum();
+		
+		System.out.println("The sum is ::: "+sum);
+		
+		
+		Map<String, List<String>> people = new HashMap<>();
+		people.put("John", Arrays.asList("555-1123", "555-3389"));
+		people.put("Mary", Arrays.asList("555-2243", "555-5264"));
+		people.put("Steve", Arrays.asList("555-6654", "555-3242"));
+		 
+		List<String> phones = people.values().stream()
+		  .flatMap(Collection::stream)
+		    .collect(Collectors.toList());
+		
+		System.out.println("The phones list is ::: "+phones.toString());
+		
+		int x = 0; int y =1;
+		
+	//	int c = y/=x;
+		
+		int a[] = {1,2,04};
+		
+		
+		System.out.println(a instanceof Object);
+		*/
 		BinaryTree bt = new BinaryTree();
 		bt.addNode(9);
-		bt.addNode(7);
+		bt.addNode(11);
 	
 		bt.addNode(3);
-		bt.addNode(2);
+		/*bt.addNode(2);
 		bt.addNode(5);
 		bt.addNode(17);
 		bt.addNode(12);
@@ -116,7 +194,9 @@ public class BinaryTree {
 		bt.addNode(8);
 		bt.addNode(4);
 		bt.addNode(6);
-		
+		*/
+		int height = bt.heightOfBTree(bt.rootNode);
+		System.out.println("height "+height);
 		System.out.println("postOrderTraversal ");
 		bt.postOrderTraversal(bt.rootNode);
 		
@@ -182,6 +262,16 @@ public class BinaryTree {
 	
 	public int heightOfBTree(Node node)
 	{
+		if(node==null || (node.left ==null && node.right == null)) {
+			return 0;
+		}else {
+			return 1 + Math.max(heightOfBTree(node.left), heightOfBTree(node.right));
+		}		
+	}
+	
+	/*
+	 public int heightOfBTree(Node node)
+	{
 		if(node==null) return 0;
 		
 		int left = heightOfBTree(node.left);
@@ -199,6 +289,7 @@ public class BinaryTree {
 		return height;
 		
 	}
+	 */
 	
 	public void deleteNode(int value)
 	{
@@ -315,6 +406,7 @@ public class BinaryTree {
 			if(current.right!=null) {
 				nodeHolder.add(current.right);
 			}			
+			 
 		}		
 	}
 	
