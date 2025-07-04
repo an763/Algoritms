@@ -1,4 +1,4 @@
-package com.practice.amazon;
+package com.practice;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -26,7 +26,7 @@ the calling thread until the result is available.
 Checking Task Status:
 
 The Future allows you to check if the task is completed with the isDone() method.
-You can also cancel the task if it hasn’t finished execution using the cancel() method.
+You can also cancel the task if it hasnï¿½t finished execution using the cancel() method.
 Common Methods in Future:
 get():
 
@@ -44,7 +44,7 @@ isCancelled():
 
 Returns true if the task was successfully canceled.
 Example of Using Future:
-Here’s an example that demonstrates how a Future can be used with an ExecutorService to handle the result of a concurrent computation:
+Hereï¿½s an example that demonstrates how a Future can be used with an ExecutorService to handle the result of a concurrent computation:
  *
  */
 

@@ -1,4 +1,4 @@
-package com.practice.amazon;
+package com.practice;
 
 import java.awt.Color;
 import java.awt.Font;

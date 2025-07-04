@@ -1,4 +1,4 @@
-package com.practice.amazon;
+package com.practice;
 
 
 import java.util.ArrayList;
