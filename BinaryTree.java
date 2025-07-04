@@ -441,7 +441,15 @@ public class BinaryTree {
 	    }
 	
 
-	
+	  boolean bTreeCheck(Node a, Node b)
+	  {
+	  	if(a== null && b == null) return true;
+	  	
+	  	if(a== null || b == null) return false;
+	  	
+	  	if(a.value != b.value) return false;
+	  	return bTreeCheck(a.left, b.left) && bTreeCheck(a.right, b.right);
+	  }
 	
 	
 

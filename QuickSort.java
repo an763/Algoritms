@@ -4,7 +4,7 @@ public class QuickSort {
 	
 	
 	public static void main(String args[]) {
-		int [] unsortedArr = {8,5,7,4,2,9,18,0,7,56};
+		int [] unsortedArr = {6,5,4,3,2,1};
 		QuickSort q = new QuickSort();
 		q.quickSort(unsortedArr, 0, unsortedArr.length-1);		
 		for(int i=0; i<unsortedArr.length; i++) {
@@ -16,7 +16,7 @@ public class QuickSort {
 	public void quickSort(int [] arr, int low, int high) {	
 		if(low<high) {
 			//int partInd = findPivotPosition(arr,low,high);
-			int partInd = secondMethod(arr,low,high);
+			int partInd = ascendMethod(arr,low,high);
 			quickSort(arr,low,partInd-1);
 			quickSort(arr,partInd+1,high);
 		}
@@ -43,16 +43,42 @@ public class QuickSort {
 	    return i+1;
 	}
 	
-	public int secondMethod(int[] arr,int begin, int end) {
+	public int ascendMethod(int[] arr,int begin, int end) {
 		int pivot = arr[begin];
 		int i= begin;
 		int j= end;
 		
 		while(i<j) {
-			while(arr[i] <= pivot && i <= end) {
+			while(i < end && arr[i] <= pivot) {
 				i++;
 			}			
-			while(arr[j] > pivot && j >= begin) {
+			while(j > begin && arr[j] >= pivot) {
+				j--;
+			}
+			
+			if(i<j) {
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+		
+		arr[begin] = arr[j];
+		arr[j] = pivot;
+		
+		return j;
+	}
+	
+	public int descendMethod(int[] arr,int begin, int end) {
+		int pivot = arr[begin];
+		int i= begin;
+		int j= end;
+		
+		while(i<j) {
+			while(i < end && arr[i] >= pivot) {
+				i++;
+			}			
+			while(j > begin && arr[j] <= pivot) {
 				j--;
 			}
 			
