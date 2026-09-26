@@ -6,7 +6,7 @@ public class Anagrams {
     static boolean isAnagram(String a, String b) {
         Map<Character, Integer> first = new HashMap<>();
         Map<Character, Integer> sec = new HashMap<>();
-      
+
         a = a.toLowerCase();
         b = b.toLowerCase();
         char[] firstArr = a.toCharArray();

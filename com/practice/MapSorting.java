@@ -1,19 +1,13 @@
 package com.practice;
 
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.time.Instant;
 
 public class MapSorting {
 
-	public static void main(String args[]) {
+	public static void main() {
 		Map<String, Integer> testMap = new HashMap<>();
 		testMap.put("Anu", 53);
 		testMap.put("Alka", 51);
@@ -24,7 +18,8 @@ public class MapSorting {
 										.stream()
 										.sorted(Map.Entry.comparingByValue())
 										.collect(Collectors
-												 .toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new)
+												 .toMap(Map.Entry::getKey, Map.Entry::getValue,
+														 (e1, e2) -> e1, LinkedHashMap::new)
 												);
 
 		// Printing the sorted map
@@ -33,21 +28,51 @@ public class MapSorting {
 		newFunction();
 	}
 
-	public static void main1() {
+	public static void main(String args[]) {
 		Map<String, Integer> testMap = new HashMap<>();
 		testMap.putIfAbsent("python", 85);
 		testMap.putIfAbsent("java", 72);
 		testMap.putIfAbsent("Scala", 48);
 		testMap.putIfAbsent("Ruby", 60);
 		System.out.println("Start ==>> " + Instant.now().getEpochSecond());
+
+		Set<Entry<String,Integer>> myEntry = testMap.entrySet();
+		List<Entry<String,Integer>> myList = new ArrayList<>(myEntry);
+		myList.stream()
+				.sorted((a,b)-> Integer.compare(b.getValue(),a.getValue()))
+				.forEach(System.out::println);
+
+		//myList.sort(Comparator.comparing(Map.Entry<String,Integer>::getValue).reversed());
+
+		System.out.println("Start ==>> End" + Instant.now().getEpochSecond());
+		Stack<Character> stack = new Stack<>();
+		char c = 'a';
+		switch(c) {
+			case '{': case '[' : case '(' :
+				stack.push(c);
+				break;
+			case '}':
+				if(stack.isEmpty() || stack.pop() != '{') //return false;
+				break;
+
+
+		}
+
+
+
+
+
+
+
+
 		
 		
 
 		Map<String, Integer> sortedMap = testMap.entrySet()
-												.stream().sorted(Map.Entry.comparingByValue()) // Sort by value (ascending)
+												.stream().sorted(Entry.comparingByValue()) // Sort by value (ascending)
 												.collect(
-														Collectors.toMap(Map.Entry::getKey,
-																		Map.Entry::getValue, 
+														Collectors.toMap(Entry::getKey,
+																		Entry::getValue, 
 																		(oldValue, newValue) -> oldValue,
 																		LinkedHashMap::new));
 
@@ -57,9 +82,10 @@ public class MapSorting {
 
 		List<Entry<String, Integer>> entryList = new ArrayList<>();
 		System.out.println("Start ==>> " + Instant.now().getEpochSecond());
-		for (Map.Entry<String, Integer> entrySet : testMap.entrySet()) {
+		for (Entry<String, Integer> entrySet : testMap.entrySet()) {
 			entryList.add(entrySet);
 		}
+		Collections.sort(entryList,(o1, o2) -> (o1.getValue() - o2.getValue()));
 		
 		entryList.sort((o1, o2) -> (o1.getValue() - o2.getValue()));
 
@@ -68,7 +94,7 @@ public class MapSorting {
 			lMap.put(entryNum.getKey(), entryNum.getValue());
 		}
 
-		for (Map.Entry<String, Integer> lmapEntry : lMap.entrySet()) {
+		for (Entry<String, Integer> lmapEntry : lMap.entrySet()) {
 			System.out
 					.println("The element key  " + lmapEntry.getKey() + " The element value  " + lmapEntry.getValue());
 		}
@@ -107,6 +133,31 @@ public class MapSorting {
 		 
 		
 		
+	}
+
+	public boolean findRobot(String input){
+		String str = input;
+		int[] start = {0,0};
+		for(int i = 0; i< str.length(); i++){
+			char ch = str.charAt(i);
+			switch (ch){
+				case 'U':
+					start[0] = start[0] -1;
+					break;
+				case 'D' :
+					start[0] = start[0] + 1;
+					break;
+				case 'R':
+					start[1] = start[1] + 1;
+					break;
+				case 'L':
+					start[1] = start[1] -1;
+					break;
+				default:
+					break;
+			}
+		}
+		return false;
 	}
 	
 	

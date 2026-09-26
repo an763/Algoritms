@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Stack;
+
 public class RemoveElements {
     public int removeElement(int[] nums, int val) {
         if(nums == null) return 0;
@@ -8,6 +12,10 @@ public class RemoveElements {
                 return 1;
             }
         }
+
+        ArrayList<Character> open = new ArrayList<>();
+        char[] openArr = {'{','(','['};
+
 
         int left = 0; int right = nums.length -1;
 

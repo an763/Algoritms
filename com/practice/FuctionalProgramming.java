@@ -1,5 +1,6 @@
 package com.practice;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,7 +36,7 @@ public class FuctionalProgramming {
 
 
 
-		Map<String, Integer> sortedMap	= unsortedMap.entrySet()
+/*		Map<String, Integer> sortedMap	= unsortedMap.entrySet()
 														.stream()
 														.sorted((Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2) ->
 																e1.getValue().compareTo(e2.getValue()))
@@ -44,13 +45,8 @@ public class FuctionalProgramming {
 																(Map.Entry<String, Integer> e) -> e.getValue(),
 																                (oldVal,newVal) -> oldVal, ()->new LinkedHashMap()));
 
-
-
-		
-		
-		
 		 sortedMap.forEach((k, v) -> System.out.println(k + " -> " + v));
-		
+		*/
 		 ExecutorService executorService = Executors.newFixedThreadPool(5);
 		executorService.submit(() -> {
 			System.out.println("test");
@@ -61,13 +57,17 @@ public class FuctionalProgramming {
 		
 		PriorityQueue<Integer> priorityQueueDesc = new PriorityQueue<>((a, b) -> b.compareTo(a));
 		
-		
+
 	}
 	
 	
 	public static void main(String args[]) throws Exception {
 		sortMap();
 		Predicate<String> p1 = s-> s.length() > 2;
+		Predicate<Integer> i1 = i-> i>3;
+		i1.test(4);
+		Function<String, Integer> f11 = s -> s.length();
+		int j = f11.apply("anurag");
 		System.out.println("The out of Pred is "+ p1.test("Anurag"));
 		
 		Function<String, String> f1 = s-> s.toUpperCase();
@@ -137,8 +137,16 @@ public class FuctionalProgramming {
 		for(Map.Entry<String, Integer> entity2 : newsortedMap.entrySet()) {
 			System.out.println("entity key "+entity2.getKey() +"== entity value"+entity2.getValue());
 		}
-		
-		
+
+	List<Map.Entry> myList =	map.entrySet().stream()
+				      .sorted((e1,e2) -> (e1.getValue().compareTo(e2.getValue())))
+				.collect(Collectors.toList());
+		Map<String, Integer> mySortedMap = new LinkedHashMap<>();
+
+		for(Map.Entry<String, Integer> ent : myList){
+			mySortedMap.put(ent.getKey(), ent.getValue());
+		}
+
 		Map<String, Integer> mysortedMap = map.entrySet()
 				.stream().sorted((e1,e2)->(e2.getValue().compareTo(e1.getValue()))) // Sort by value (desc)
 				.collect(

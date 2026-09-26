@@ -1,14 +1,10 @@
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
 
 public class GraphNode {
 	
 	public Map<Integer,MyNode> nodeLookup = new HashMap<>();
-	
+
 	public static class MyNode{
 		private int id;
 		public List<MyNode> adjacent = new LinkedList<>();
@@ -19,6 +15,7 @@ public class GraphNode {
 	
 	
 	public void addEdge(int source, int dest) {
+
 		MyNode sNode = nodeLookup.get(source);
 		MyNode dNode = nodeLookup.get(dest);
 		sNode.adjacent.add(dNode);
@@ -81,6 +78,28 @@ public class GraphNode {
 				}			
 		}
 		return false;
+	}
+
+
+	public List<MyNode> cloneGraph(List<MyNode> nodeList){
+		Map<MyNode, MyNode> mapNode = new HashMap<>();
+		List<MyNode> cloneList = new ArrayList<>();
+
+		for(MyNode node : nodeList){
+			if(!mapNode.containsKey(node)){
+				mapNode.put(node, new MyNode(node.id));
+			}
+			MyNode temp = mapNode.get(node);
+			for(MyNode neighbor : node.adjacent){
+				if(!mapNode.containsKey(neighbor)){
+					mapNode.put(neighbor, new MyNode(neighbor.id));
+				}
+				MyNode tempNeighbor = mapNode.get(neighbor);
+				temp.adjacent.add(tempNeighbor);
+			}
+			cloneList.add(temp);
+		}
+		return cloneList;
 	}
 	
 	

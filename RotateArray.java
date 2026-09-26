@@ -2,7 +2,6 @@
 public class RotateArray {
 	
 	static int[][]  rotateArray(int [][] matrix){
-		
 		int N = matrix.length;
 		int temp=0;
 		for(int i=0; i < N; i++ ) {

@@ -1,6 +1,10 @@
+import java.util.*;
+import java.util.LinkedList;
 
 public class KthGrammer {
-	
+
+	public static LongestSubstring str = new LongestSubstring();
+
 	 public static int kthGrammar(int N, int K) {
 	        if(Math.pow(2,N) < K){return 0;}
 	        int count = 0;
@@ -58,6 +62,31 @@ public class KthGrammer {
 		
 		System.out.println("The nth row second .... "+kthGrammarSecond(10, 7));
 		
+	}
+
+
+	public int[] topKFrequent(int[] nums, int k) {
+		Map<Integer, Integer> map = new HashMap<>();
+		for(int num : nums){
+			map.put(num,map.getOrDefault(num,0)+1);
+		}
+		Comparator<Map.Entry<Integer,Integer>> comp = new Comparator<>(){
+			@Override
+			public int compare(Map.Entry<Integer,Integer> o1, Map.Entry<Integer,Integer> o2){
+				return o1.getValue() - o2.getValue();
+			}
+		};
+		PriorityQueue<Map.Entry<Integer,Integer>> minHeap = new PriorityQueue<>(comp);
+		for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+			minHeap.offer(entry);
+			if(minHeap.size() > k){
+				minHeap.poll();
+			}
+		}
+
+		Queue q1 = new LinkedList();
+
+		return nums;
 	}
 
 }

@@ -21,7 +21,7 @@ public class ReverseSentence {
 	}
 	
 	public static void main(String args[]) {
-		String sentence = reverseSentence("My name is Anurag");
+		String sentence = reverseSentence("My name    is Anurag");
 		System.out.println("Length after reverseSentence :"+sentence.length());
 		System.out.println(sentence);
 		

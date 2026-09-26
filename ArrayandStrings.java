@@ -308,6 +308,38 @@ public class ArrayandStrings {
 			 }
 		 }
 	 }
+
+	 public static void move(int a[]){
+		int counter =0;
+		int tracker = 0;
+
+		for(int i=0; i<a.length; i++){
+			if(a[i] != 0){
+				a[tracker] = a[i];
+				tracker++;
+			}
+		}
+		for(int i=tracker; i<a.length;i++){
+			a[i] =0;
+		}
+	 }
+
+	public static void moveB(int a[]){
+
+		int tracker = a.length-1;
+
+		for(int i=a.length-1; i>=0; i--){
+			if(a[i] != 0){
+				a[tracker] = a[i];
+				tracker--;
+			}
+		}
+		for(int i=tracker; i>=0;i--){
+			a[i] =0;
+		}
+	}
+
+
 	 
 	 public static void moveZerosToEndNew(int arr[]) {
 		 int boundary = -1;

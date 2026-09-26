@@ -87,7 +87,7 @@ public class ProducerConsumer {
         									unsortedMap.put(k, newVal);
         									System.out.println("key "+k +"   value "+unsortedMap.get(k));
         								});
-		
+
 		for(Map.Entry<String, Integer> entrySet : unsortedMap.entrySet()) {
 			System.out.println("---->>> "+unsortedMap.compute(entrySet.getKey(), (k,v)-> (k.equalsIgnoreCase("Anurag") ? v = 100 : v)));
 		}
@@ -132,6 +132,14 @@ class MapValueSorter implements Comparator<Map.Entry<String, Integer>>{
 			return 1;
 		}
 		return 0;
+	}
+
+	public void test() {
+		Map<Integer, Integer> map = new HashMap<>();
+		for (Map.Entry<Integer, Integer> entry : map.entrySet()){
+			int key = entry.getKey();
+			int val = entry.getValue();
+		}
 	}
 	
 }

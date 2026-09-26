@@ -1,27 +1,20 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class BinaryTree {   
-	
-	Node rootNode = null;
-	Node nodeToadd = null;
+public class BinaryTree {
+
+	NodeBTree rootNode = null;
+	NodeBTree nodeToadd = null;
 	List<Integer> st = new ArrayList<Integer>();
 	int height;
 	
 	
 	
-	public void swapBTree(Node node) {
+	public void swapBTree(NodeBTree node) {
 		if(node == null) return;
-		Node temp = node.left;
+		NodeBTree temp = node.left;
 		node.left = node.right;
 		node.right = temp;
 		swapBinaryTree(node.left);
@@ -40,6 +33,9 @@ public class BinaryTree {
 		    return true;
 		  }
 
+
+
+
 		  public boolean isValidBST(TreeNode root) {
 		    return helper(root, null, null);
 		  }
@@ -51,11 +47,11 @@ public class BinaryTree {
 
 		if(rootNode == null)
 		{
-			rootNode= new Node(null,null,nodeVal);
+			rootNode= new NodeBTree(null,null,nodeVal);
 		}
 		else
 		{
-			Node tempNode = rootNode;
+			NodeBTree tempNode = rootNode;
 			
 			while(tempNode != null)
 			{
@@ -73,18 +69,18 @@ public class BinaryTree {
 			// now the pointer is at nodeToadd
 			if(nodeToadd.value > nodeVal)
 			{
-				nodeToadd.left = new Node(null,null,nodeVal);
+				nodeToadd.left = new NodeBTree(null,null,nodeVal);
 			}
 			else
 			{
-				nodeToadd.right = new Node(null,null,nodeVal);
+				nodeToadd.right = new NodeBTree(null,null,nodeVal);
 			}
 			
 		}		
 		
 	}
 	
-	public void preOrderTraversal(Node node)
+	public void preOrderTraversal(NodeBTree node)
 	{
 		if (node == null) return;
 		
@@ -93,7 +89,7 @@ public class BinaryTree {
 		preOrderTraversal(node.right);
 	}
 	
-	public void inOrderTraversal(Node node)
+	public void inOrderTraversal(NodeBTree node)
 	{
 		if (node == null) return;
 		inOrderTraversal(node.left);
@@ -101,7 +97,7 @@ public class BinaryTree {
 		inOrderTraversal(node.right);
 	}
 	
-	public void postOrderTraversal(Node node)
+	public void postOrderTraversal(NodeBTree node)
 	{
 		
 		
@@ -234,7 +230,7 @@ public class BinaryTree {
 		
 	}
 	 
-	public void kthSmallestElement(Node node, int k)
+	public void kthSmallestElement(NodeBTree node, int k)
 	{	
 		if((node == null) || (st.size()>=k)) return;		
 		kthSmallestElement(node.left,k);		
@@ -242,7 +238,7 @@ public class BinaryTree {
 		kthSmallestElement(node.right,k);
 	}     
 	
-	public void kthLargestElement(Node node, int k)
+	public void kthLargestElement(NodeBTree node, int k)
 	{	
 		if((node == null) || (st.size()>=k)) return;		
 		kthLargestElement(node.right,k);		
@@ -250,17 +246,17 @@ public class BinaryTree {
 		kthLargestElement(node.left,k);
 	}
 	
-	public void swapBinaryTree(Node node)
+	public void swapBinaryTree(NodeBTree node)
 	{
 		if(node== null) return;
-		Node temp = node.left;
+		NodeBTree temp = node.left;
 		node.left = node.right;
 		node.right = temp;
 		swapBinaryTree(node.left);
 		swapBinaryTree(node.right);		
 	}
 	
-	public int heightOfBTree(Node node)
+	public int heightOfBTree(NodeBTree node)
 	{
 		if(node==null || (node.left ==null && node.right == null)) {
 			return 0;
@@ -293,9 +289,9 @@ public class BinaryTree {
 	
 	public void deleteNode(int value)
 	{
-		Node node = rootNode;
-		Node temp=null;
-		Node tempR = null;
+		NodeBTree node = rootNode;
+		NodeBTree temp=null;
+		NodeBTree tempR = null;
 		boolean left = false, right = false;
 		
 		while((node != null) )
@@ -363,7 +359,7 @@ public class BinaryTree {
 				if(left)
 				{
 					temp.left = node.left;
-					Node traverse = node.left;
+					NodeBTree traverse = node.left;
 					while (traverse !=null)
 					{
 						tempR = traverse;
@@ -375,7 +371,7 @@ public class BinaryTree {
 				else if(right)
 				{
 					temp.right = node.right;
-					Node traverse = node.right;
+					NodeBTree traverse = node.right;
 					
 					while (traverse !=null)
 					{
@@ -393,12 +389,12 @@ public class BinaryTree {
 		
 	}
 	
-	public void levelOrder(Node node) {
+	public void levelOrder(NodeBTree node) {
 		if(node==null) return;		
-		Queue<Node> nodeHolder = new LinkedList<Node>();
+		Queue<NodeBTree> nodeHolder = new LinkedList<NodeBTree>();
 		nodeHolder.add(node);		
 		while(!nodeHolder.isEmpty()) {
-			Node current = nodeHolder.poll();
+			NodeBTree current = nodeHolder.poll();
 			System.out.println("The value of node :: "+current.value);
 			if(current.left!=null) {
 				nodeHolder.add(current.left);
@@ -441,7 +437,7 @@ public class BinaryTree {
 	    }
 	
 
-	  boolean bTreeCheck(Node a, Node b)
+	  boolean bTreeCheck(NodeBTree a, NodeBTree b)
 	  {
 	  	if(a== null && b == null) return true;
 	  	
@@ -455,12 +451,12 @@ public class BinaryTree {
 
 }
 
-class Node{
-	Node left;
-	Node right;
+class NodeBTree {
+	NodeBTree left;
+	NodeBTree right;
 	int value;
 	
-	Node(Node left,Node right,int val){
+	NodeBTree(NodeBTree left, NodeBTree right, int val){
 		this.left = left;
 		this.right = right;
 		this.value = val;
